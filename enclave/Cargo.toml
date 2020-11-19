@@ -10,13 +10,13 @@ crate-type = ["staticlib"]
 [features]
 default = []
 
-[target.'cfg(not(target_env = "sgx"))'.dependencies]
-sgx_types = { git = "https://github.com/apache/teaclave-sgx-sdk.git" }
-sgx_tstd = { git = "https://github.com/apache/teaclave-sgx-sdk.git" }
+[patch.'https://github.com/apache/teaclave-sgx-sdk.git']
+sgx_tstd = { path = "../../../sgx_tstd" }
 
+[dependencies]
 ringbuf = { path = "../../../../ringbuf"  }
 
-[patch.'https://github.com/apache/teaclave-sgx-sdk.git']
+[target.'cfg(not(target_env = "sgx"))'.dependencies]
 sgx_alloc = { path = "../../../sgx_alloc" }
 sgx_backtrace = { path = "../../../sgx_backtrace" }
 sgx_backtrace_sys = { path = "../../../sgx_backtrace_sys" }
@@ -44,4 +44,3 @@ sgx_types = { path = "../../../sgx_types" }
 #sgx_ucrypto = { path = "../../../sgx_ucrypto" }
 sgx_unwind = { path = "../../../sgx_unwind" }
 #sgx_urts = { path = "../../../sgx_urts" }
-
